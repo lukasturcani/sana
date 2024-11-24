@@ -16,9 +16,6 @@ dynamic = ["version"]
 readme = "README.rst"
 description = "Does things for you."
 
-[project.scripts]
-sana = "sana._internal.scripts.app:main"
-
 [dependency-groups]
 dev = [
   "ruff",
@@ -28,6 +25,7 @@ dev = [
   "sphinx",
   "sphinx-copybutton",
   "furo",
+  "pex>=2.24.1",
 ]
 
 [project.urls]

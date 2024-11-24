@@ -638,6 +638,15 @@ wheels = [
 ]
 
 [[package]]
+name = "pex"
+version = "2.24.1"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/d7/63/6f0ee34888fe9023e89165bbbdafe99c56ebc137f67761d962c1f583a2f6/pex-2.24.1.tar.gz", hash = "sha256:6661f1c2e48ffcd7ea181111ec85bf811a421df76fd6918dc71202fea6f30171", size = 4432992 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/84/4f/b7673810a5c3e81184faaac76ebbb440c0fb7e841c776b15c7374e9dbf18/pex-2.24.1-py2.py3-none-any.whl", hash = "sha256:fa463f5dd9574cbbaad5d927e2cbb3ce179edbd1bafb0f5fd9e4334717c4886e", size = 3558197 },
+]
+
+[[package]]
 name = "pluggy"
 version = "1.5.0"
 source = { registry = "https://pypi.org/simple" }
@@ -902,7 +911,7 @@ wheels = [
 
 [[package]]
 name = "sana"
-version = "0.1.dev4+g1d60e58.d20241124"
+version = "0.1.dev5+gf893c43.d20241124"
 source = { editable = "." }
 dependencies = [
     { name = "nicegui" },
@@ -912,6 +921,7 @@ dependencies = [
 dev = [
     { name = "furo" },
     { name = "mypy" },
+    { name = "pex" },
     { name = "pytest" },
     { name = "pytest-cov" },
     { name = "ruff" },
@@ -926,6 +936,7 @@ requires-dist = [{ name = "nicegui", specifier = ">=2.7.0" }]
 dev = [
     { name = "furo" },
     { name = "mypy" },
+    { name = "pex", specifier = ">=2.24.1" },
     { name = "pytest" },
     { name = "pytest-cov" },
     { name = "ruff" },

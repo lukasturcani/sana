@@ -48,4 +48,8 @@ fix:
 
 # Build a release.
 build:
-  uv build
+  uv run pex . --scie eager -m "sana._internal.scripts.app" -o dist/sana
+
+# Run sana.
+run: build
+  ./dist/sana
