@@ -93,6 +93,7 @@ async def pick_file() -> None:
 
 @ui.page("/")
 def index() -> None:
+    ui.page_title("Sana")
     ui.button("Choose file", on_click=pick_file, icon="folder")
     analysis_ui()
 
