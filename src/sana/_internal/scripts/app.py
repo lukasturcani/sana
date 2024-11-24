@@ -49,21 +49,21 @@ def analysis_ui() -> None:
     with ui.card():
         ui.label("Sliding Mean")
         with ui.column().classes("w-full"):
-            with ui.row().classes("w-full"):
+            with ui.row():
                 every = ui.slider(min=1, max=10, step=1).bind_value(
                     data, "every"
                 )
                 ui.label().bind_text_from(
                     every, "value", lambda v: f"Every: {v} s"
                 )
-            with ui.row().classes("w-full"):
+            with ui.row():
                 period = ui.slider(min=1, max=500, step=1).bind_value(
                     data, "period"
                 )
                 ui.label().bind_text_from(
                     period, "value", lambda v: f"Window Size: {v} s"
                 )
-            with ui.row().classes("w-full"):
+            with ui.row():
                 offset = ui.slider(min=0, max=50, step=1).bind_value(
                     data, "offset"
                 )
