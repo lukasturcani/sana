@@ -10,7 +10,9 @@ maintainers = [
 
 dependencies = [
     "claspy>=0.2.5",
+    "matplotlib>=3.9.2",
     "nicegui>=2.7.0",
+    "numpy>=2.0.2",
     "plotly>=5.24.1",
     "polars>=1.14.0",
     "pywin32>=308 ; sys_platform == 'windows'",
@@ -80,7 +82,7 @@ warn_unreachable = true
 disallow_any_generics = true
 
 [[tool.mypy.overrides]]
-module = ["plotly.*"]
+module = ["plotly.*", "claspy.*"]
 ignore_missing_imports = true
 
 [tool.pytest.ini_options]

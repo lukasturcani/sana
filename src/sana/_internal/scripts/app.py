@@ -3,13 +3,16 @@ from collections.abc import Callable
 from datetime import timedelta
 from pathlib import Path
 
+import polars as pl
 from nicegui import binding, native, ui
 
 from sana._internal.analysis import (
+    plot_clasp_profile,
     plot_cum_sum,
     plot_raw_data,
     plot_sliding_mean,
     read_file,
+    segment,
 )
 from sana._internal.components.local_file_picker import LocalFilePicker
 
@@ -49,6 +52,10 @@ def analysis_ui() -> None:
     with ui.card():
         ui.label("Raw Data")
         figure = plot_raw_data(spectrum)
+        segments = segment(spectrum)
+        for location in segments:
+            x = spectrum["x"].cast(pl.Int64)[int(location)] / 1000
+            figure.add_vline(x)
         ui.plotly(figure)
 
     with ui.card():
@@ -75,12 +82,18 @@ def analysis_ui() -> None:
             period=timedelta(seconds=data.period),
             offset=timedelta(seconds=data.offset),
         )
+
         ui.plotly(figure)
 
     with ui.card():
         ui.label("CumSum")
         figure = plot_cum_sum(spectrum)
         ui.plotly(figure)
+
+    with ui.card():
+        ui.label("Profile")
+        figure = plot_clasp_profile(spectrum)
+        ui.matplotlib()
 
 
 data = Data(on_change=analysis_ui.refresh)

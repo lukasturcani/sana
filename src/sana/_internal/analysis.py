@@ -1,8 +1,12 @@
 from datetime import UTC, datetime, timedelta
 from pathlib import Path
 
+import numpy as np
+import numpy.typing as npt
 import plotly.graph_objects as go
 import polars as pl
+from claspy.segmentation import BinaryClaSPSegmentation
+import matplotlib.pyplot as plt
 
 
 def read_file(path: Path) -> pl.DataFrame:
@@ -75,3 +79,15 @@ def plot_cum_sum(data: pl.DataFrame) -> go.Figure:
         yaxis_title="Cumulative Power (ms<sup>2</sup>)",
     )
     return fig
+
+
+def plot_clasp_profile(data: pl.DataFrame) -> plt.Axes:
+    clasp = BinaryClaSPSegmentation(validation=None, n_segments=3).fit(
+        data["y"].to_numpy()
+    )
+    return clasp.plot()
+
+
+def segment(data: pl.DataFrame) -> npt.NDArray[np.int64]:
+    segmentation = BinaryClaSPSegmentation(validation=None, n_segments=3)
+    return segmentation.fit_predict(data["y"].to_numpy())
