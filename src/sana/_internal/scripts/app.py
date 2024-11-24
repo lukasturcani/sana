@@ -17,7 +17,7 @@ class Data:
     def __init__(self, on_change: Callable[[], None]) -> None:
         self.on_change = on_change
         self._page: Path | None = None
-        self.every = 1
+        self.every = 50
         self.period = 120
         self.offset = 0
 
@@ -48,15 +48,21 @@ def analysis_ui() -> None:
 
     with ui.card():
         ui.label("Sliding Mean")
-        ui.number(value=data.every).bind_value(data, "every").on(
-            "keydown.enter", analysis_ui.refresh
-        )
-        ui.number(value=data.period).bind_value(data, "period").on(
-            "keydown.enter", analysis_ui.refresh
-        )
-        ui.number(value=data.offset).bind_value(data, "offset").on(
-            "keydown.enter", analysis_ui.refresh
-        )
+        with ui.row():
+            ui.label("Every:")
+            ui.number(value=data.every).bind_value(data, "every").on(
+                "keydown.enter", analysis_ui.refresh
+            )
+        with ui.row():
+            ui.label("Window Size:")
+            ui.number(value=data.period).bind_value(data, "period").on(
+                "keydown.enter", analysis_ui.refresh
+            )
+        with ui.row():
+            ui.label("Offset:")
+            ui.number(value=data.offset).bind_value(data, "offset").on(
+                "keydown.enter", analysis_ui.refresh
+            )
         ui.button("confirm", on_click=analysis_ui.refresh)
         figure = plot_sliding_mean(
             spectrum,
