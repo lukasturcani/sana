@@ -56,4 +56,4 @@ run: build
 
 # Run sana in dev mode.
 dev:
-  SANA_RELOAD=TRUE uv run --script ./src/sana/_internal/scripts/app.py
+  SANA_RELOAD=TRUE uv run ./src/sana/_internal/scripts/app.py
