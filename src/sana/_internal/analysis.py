@@ -58,6 +58,6 @@ def plot_sliding_mean(
     )
     fig.update_layout(
         xaxis_title="Time (s)",
-        yaxis_title="Power (ms<sup>2</sup>)",
+        yaxis_title="Mean Power (ms<sup>2</sup>)",
     )
     return fig

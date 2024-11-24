@@ -3,16 +3,23 @@ from collections.abc import Callable
 from datetime import timedelta
 from pathlib import Path
 
-from nicegui import native, ui
+from nicegui import binding, native, ui
 
 from sana._internal.analysis import plot_raw_data, plot_sliding_mean, read_file
 from sana._internal.components.local_file_picker import LocalFilePicker
 
 
 class Data:
+    every = binding.BindableProperty()
+    period = binding.BindableProperty()
+    offset = binding.BindableProperty()
+
     def __init__(self, on_change: Callable[[], None]) -> None:
         self.on_change = on_change
         self._page: Path | None = None
+        self.every = 1
+        self.period = 120
+        self.offset = 0
 
     @property
     def page(self) -> Path | None:
@@ -41,11 +48,33 @@ def analysis_ui() -> None:
 
     with ui.card():
         ui.label("Sliding Mean")
+        with ui.column().classes("w-full"):
+            with ui.row().classes("w-full"):
+                every = ui.slider(min=1, max=10, step=1).bind_value(
+                    data, "every"
+                )
+                ui.label().bind_text_from(
+                    every, "value", lambda v: f"Every: {v} s"
+                )
+            with ui.row().classes("w-full"):
+                period = ui.slider(min=1, max=500, step=1).bind_value(
+                    data, "period"
+                )
+                ui.label().bind_text_from(
+                    period, "value", lambda v: f"Window Size: {v} s"
+                )
+            with ui.row().classes("w-full"):
+                offset = ui.slider(min=0, max=50, step=1).bind_value(
+                    data, "offset"
+                )
+                ui.label().bind_text_from(
+                    offset, "value", lambda v: f"Offset: {v} s"
+                )
         figure = plot_sliding_mean(
             spectrum,
-            every=timedelta(seconds=1),
-            period=timedelta(seconds=120),
-            offset=timedelta(seconds=0),
+            every=timedelta(seconds=every.value),
+            period=timedelta(seconds=period.value),
+            offset=timedelta(seconds=offset.value),
         )
         ui.plotly(figure)
 
