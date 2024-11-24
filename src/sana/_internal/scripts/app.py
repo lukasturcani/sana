@@ -1,9 +1,11 @@
 import os
 from collections.abc import Callable
+from datetime import timedelta
 from pathlib import Path
 
 from nicegui import native, ui
 
+from sana._internal.analysis import plot_raw_data, plot_sliding_mean, read_file
 from sana._internal.components.local_file_picker import LocalFilePicker
 
 
@@ -24,9 +26,28 @@ class Data:
 
 @ui.refreshable
 def analysis_ui() -> None:
-    if data.page is not None:
-        with ui.card():
-            ui.label(f"Viewing {data.page}")
+    if data.page is None:
+        return
+
+    spectrum = read_file(data.page)
+
+    with ui.card():
+        ui.label(f"Viewing {data.page}")
+
+    with ui.card():
+        ui.label("Raw Data")
+        figure = plot_raw_data(spectrum)
+        ui.plotly(figure)
+
+    with ui.card():
+        ui.label("Sliding Mean")
+        figure = plot_sliding_mean(
+            spectrum,
+            every=timedelta(seconds=1),
+            period=timedelta(seconds=120),
+            offset=timedelta(seconds=0),
+        )
+        ui.plotly(figure)
 
 
 data = Data(on_change=analysis_ui.refresh)
