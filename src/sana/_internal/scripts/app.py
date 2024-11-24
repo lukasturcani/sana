@@ -5,7 +5,12 @@ from pathlib import Path
 
 from nicegui import binding, native, ui
 
-from sana._internal.analysis import plot_raw_data, plot_sliding_mean, read_file
+from sana._internal.analysis import (
+    plot_cum_sum,
+    plot_raw_data,
+    plot_sliding_mean,
+    read_file,
+)
 from sana._internal.components.local_file_picker import LocalFilePicker
 
 
@@ -70,6 +75,11 @@ def analysis_ui() -> None:
             period=timedelta(seconds=data.period),
             offset=timedelta(seconds=data.offset),
         )
+        ui.plotly(figure)
+
+    with ui.card():
+        ui.label("CumSum")
+        figure = plot_cum_sum(spectrum)
         ui.plotly(figure)
 
 

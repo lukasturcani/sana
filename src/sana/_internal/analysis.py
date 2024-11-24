@@ -61,3 +61,17 @@ def plot_sliding_mean(
         yaxis_title="Mean Power (ms<sup>2</sup>)",
     )
     return fig
+
+
+def plot_cum_sum(data: pl.DataFrame) -> go.Figure:
+    fig = go.Figure(
+        go.Scatter(
+            x=(data["x"].cast(pl.Int64) / 1000).to_list(),
+            y=data["y"].cum_sum().to_list(),
+        )
+    )
+    fig.update_layout(
+        xaxis_title="Time (s)",
+        yaxis_title="Cumulative Power (ms<sup>2</sup>)",
+    )
+    return fig
