@@ -356,7 +356,7 @@ wheels = [
 
 [[package]]
 name = "sana"
-version = "0.1.dev1+g501fbb9.d20241124"
+version = "0.1.dev3+g645f372"
 source = { editable = "." }
 
 [package.dev-dependencies]
