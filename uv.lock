@@ -911,7 +911,7 @@ wheels = [
 
 [[package]]
 name = "sana"
-version = "0.1.dev5+gf893c43.d20241124"
+version = "0.1.dev6+gb36001f.d20241124"
 source = { editable = "." }
 dependencies = [
     { name = "nicegui" },
