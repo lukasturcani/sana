@@ -10,6 +10,7 @@ maintainers = [
 
 dependencies = [
     "nicegui>=2.7.0",
+    "pywin32>=308 ; sys_platform == 'windows'",
 ]
 requires-python = ">=3.12"
 dynamic = ["version"]
@@ -26,6 +27,7 @@ dev = [
   "sphinx-copybutton",
   "furo",
   "pex>=2.24.1",
+  "types-pywin32>=308.0.0.20241121",
 ]
 
 [project.urls]

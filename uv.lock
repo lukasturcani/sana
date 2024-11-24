@@ -844,6 +844,11 @@ asyncio-client = [
 ]
 
 [[package]]
+name = "pywin32"
+version = "308"
+source = { registry = "https://pypi.org/simple" }
+
+[[package]]
 name = "pyyaml"
 version = "6.0.2"
 source = { registry = "https://pypi.org/simple" }
@@ -911,10 +916,11 @@ wheels = [
 
 [[package]]
 name = "sana"
-version = "0.1.dev6+gb36001f.d20241124"
+version = "0.1.dev7+g98b69b7.d20241124"
 source = { editable = "." }
 dependencies = [
     { name = "nicegui" },
+    { name = "pywin32", marker = "sys_platform == 'windows'" },
 ]
 
 [package.dev-dependencies]
@@ -927,10 +933,14 @@ dev = [
     { name = "ruff" },
     { name = "sphinx" },
     { name = "sphinx-copybutton" },
+    { name = "types-pywin32" },
 ]
 
 [package.metadata]
-requires-dist = [{ name = "nicegui", specifier = ">=2.7.0" }]
+requires-dist = [
+    { name = "nicegui", specifier = ">=2.7.0" },
+    { name = "pywin32", marker = "sys_platform == 'windows'", specifier = ">=308" },
+]
 
 [package.metadata.requires-dev]
 dev = [
@@ -942,6 +952,7 @@ dev = [
     { name = "ruff" },
     { name = "sphinx" },
     { name = "sphinx-copybutton" },
+    { name = "types-pywin32", specifier = ">=308.0.0.20241121" },
 ]
 
 [[package]]
@@ -1098,6 +1109,15 @@ dependencies = [
 sdist = { url = "https://files.pythonhosted.org/packages/1a/4c/9b5764bd22eec91c4039ef4c55334e9187085da2d8a2df7bd570869aae18/starlette-0.41.3.tar.gz", hash = "sha256:0e4ab3d16522a255be6b28260b938eae2482f98ce5cc934cb08dce8dc3ba5835", size = 2574159 }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/96/00/2b325970b3060c7cecebab6d295afe763365822b1306a12eeab198f74323/starlette-0.41.3-py3-none-any.whl", hash = "sha256:44cedb2b7c77a9de33a8b74b2b90e9f50d11fcf25d8270ea525ad71a25374ff7", size = 73225 },
+]
+
+[[package]]
+name = "types-pywin32"
+version = "308.0.0.20241121"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/1b/45/6cb7429cbedaa4bf671832fe3b7733bfb1cce9aa156edb40f0319396d204/types_pywin32-308.0.0.20241121.tar.gz", hash = "sha256:2605a0666c470a2861df4fca261ddcc1af04c2f53833f09e657487fc27e1f4e9", size = 259179 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/84/66/0b33feedfed800ebc39aa4521b7ca866bb4b197caaa53f217b5aac5e6f7d/types_pywin32-308.0.0.20241121-py3-none-any.whl", hash = "sha256:296b736e5036398efe0deb7edb6ba60c598f76cc74e58fbf7402c15d86ebab91", size = 321900 },
 ]
 
 [[package]]
