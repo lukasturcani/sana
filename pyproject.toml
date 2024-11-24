@@ -8,11 +8,16 @@ maintainers = [
   { name = "Lukas Turcani", email = "lukasturcani93@gmail.com" },
 ]
 
-dependencies = []
+dependencies = [
+    "nicegui>=2.7.0",
+]
 requires-python = ">=3.12"
 dynamic = ["version"]
 readme = "README.rst"
 description = "Does things for you."
+
+[project.scripts]
+sana = "sana._internal.scripts.app:main"
 
 [dependency-groups]
 dev = [
